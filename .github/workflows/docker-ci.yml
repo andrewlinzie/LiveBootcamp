@@ -1,8 +1,12 @@
 name: Docker CI to ECR
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ gitops ]   # Trigger only on gitops branch pushes
+
 
 jobs:
   build-and-push:
