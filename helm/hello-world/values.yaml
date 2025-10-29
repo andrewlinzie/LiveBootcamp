@@ -52,7 +52,6 @@ resources:
     cpu: 200m
     memory: 256Mi
 
-
 livenessProbe:
   httpGet:
     path: /
@@ -74,3 +73,10 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts: []
+  tls: []
