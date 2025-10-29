@@ -29,10 +29,6 @@ podLabels: {}
 podSecurityContext: {}
 securityContext: {}
 
-service:
-  type: LoadBalancer
-  port: 8080
-
 ingress:
   enabled: false
   className: ""
@@ -73,10 +69,3 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-  hosts: []
-  tls: []
