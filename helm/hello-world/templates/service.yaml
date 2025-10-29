@@ -5,11 +5,14 @@ metadata:
   labels:
     {{- include "hello-world.labels" . | nindent 4 }}
 spec:
+  # 👇 Pulls LoadBalancer from values.yaml
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - name: http
+      # 👇 Exposes port 80 externally via ALB
+      port: 80
+      # 👇 Routes to port 8080 inside your container
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
-      name: http
   selector:
     {{- include "hello-world.selectorLabels" . | nindent 4 }}

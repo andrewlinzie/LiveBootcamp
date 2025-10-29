@@ -1,48 +1,27 @@
-# Default values for hello-world.
+# Default values for hello-world
 replicaCount: 1
 
 image:
+  # 👇 Your ECR image repo
   repository: 942010118414.dkr.ecr.us-east-2.amazonaws.com/app-repository
-  tag: bbe6416
+  tag: 
   pullPolicy: IfNotPresent
 
-service:
-  type: LoadBalancer
-  port: 8080
-
-# ✅ Critical fix: make sure your ECR secret is passed into the deployment
+# 👇 Pull secret created from your ECR login
 imagePullSecrets:
   - name: ecr-cred
 
-nameOverride: ""
-fullnameOverride: ""
+service:
+  # 👇 Ensure app is exposed publicly through AWS Load Balancer
+  type: LoadBalancer
+  # 👇 Port the container listens on
+  port: 8080
 
 serviceAccount:
   create: true
   automount: true
   annotations: {}
   name: ""
-
-podAnnotations: {}
-podLabels: {}
-
-podSecurityContext: {}
-securityContext: {}
-
-service:
-  type: LoadBalancer
-  port: 8080
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
 
 resources:
   requests:
@@ -52,24 +31,21 @@ resources:
     cpu: 200m
     memory: 256Mi
 
-
+# 👇 Probes fixed to reference numeric port (8080)
 livenessProbe:
   httpGet:
     path: /
-    port: http
+    port: 8080
 readinessProbe:
   httpGet:
     path: /
-    port: http
+    port: 8080
 
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 5
   targetCPUUtilizationPercentage: 80
-
-volumes: []
-volumeMounts: []
 
 nodeSelector: {}
 tolerations: []
