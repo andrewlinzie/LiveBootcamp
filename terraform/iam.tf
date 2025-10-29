@@ -65,3 +65,29 @@ resource "aws_iam_role_policy_attachment" "eks_ssm_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   role       = aws_iam_role.eks_node_group.name
 } 
+
+# Extra ECR pull permissions (fixes stale image cache issue)
+resource "aws_iam_role_policy" "ecr_pull_full_access" {
+  name = "eks-node-ecr-pull-fix"
+  role = aws_iam_role.eks_node_group.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:DescribeImages",
+          "ecr:ListImages",
+          "ecr:DescribeRepositories",
+          "ecr:GetRepositoryPolicy"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
