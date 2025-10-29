@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: 942010118414.dkr.ecr.us-east-2.amazonaws.com/app-repository
-  tag: 8fa0f85
+  tag: d4decbd
   pullPolicy: Always
 
 service:
