@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: 942010118414.dkr.ecr.us-east-2.amazonaws.com/app-repository
-  tag: 972be33
+  tag: 
   pullPolicy: IfNotPresent
 
 service:
@@ -28,10 +28,6 @@ podLabels: {}
 
 podSecurityContext: {}
 securityContext: {}
-
-service:
-  type: LoadBalancer
-  port: 8080
 
 ingress:
   enabled: false
@@ -73,10 +69,3 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-  hosts: []
-  tls: []
