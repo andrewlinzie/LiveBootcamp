@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: 942010118414.dkr.ecr.us-east-2.amazonaws.com/app-repository
-  tag: f3554aa
+  tag: e4b7c9c
   pullPolicy: IfNotPresent
 
 service:
